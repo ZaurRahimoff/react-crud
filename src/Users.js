@@ -43,25 +43,11 @@ export default function Users() {
   }, [])
   
   const UsersGet = () => {
-    var data = {
-      'apiKey': '4b4277bd1523915d0655ecc44992f2db'
-    }
-    fetch('https://profile.iteca.az/events_list.json', {
-      method: 'POST',
-      dataType: 'json',
-      body: JSON.stringify(data),
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-     
-    })
+    fetch("https://www.mecallapi.com/api/users")
       .then(res => res.json())
       .then(
         (result) => {
           setUsers(result)
-          console.log(result)
         }
       )
   }
@@ -125,17 +111,22 @@ export default function Users() {
             </TableHead>
             <TableBody>
               {users.map((user) => (
-                <TableRow key={user.projectID}>
-                  <TableCell align="right">{user.project}</TableCell>
+                <TableRow key={user.ID}>
+                  <TableCell align="right">{user.id}</TableCell>
                   <TableCell align="center">
                     <Box display="flex" justifyContent="center">
-                      <Avatar src={user.logo} />
+                      <Avatar src={user.avatar} />
                     </Box>
                   </TableCell>
-                  <TableCell align="left">{user.type}</TableCell>
-                  <TableCell align="left">{user.short_title}</TableCell>
-                  <TableCell align="left">{user.description}</TableCell>
-  
+                  <TableCell align="left">{user.fname}</TableCell>
+                  <TableCell align="left">{user.lname}</TableCell>
+                  <TableCell align="left">{user.username}</TableCell>
+                  <TableCell align="center">
+                    <ButtonGroup color="primary" aria-label="outlined primary button group">
+                      <Button onClick={() => UpdateUser(user.id)}>Edit</Button>
+                      <Button onClick={() => UserDelete(user.id)}>Del</Button>
+                    </ButtonGroup>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
