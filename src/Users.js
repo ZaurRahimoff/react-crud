@@ -48,9 +48,8 @@ export default function Users() {
     }
     fetch('https://profile.iteca.az/events_list.json', {
       method: 'POST',
-      mode: 'no-cors',
       dataType: 'json',
-      body: JSON.stringify(data["confList"]),
+      body: JSON.stringify(data),
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Accept': 'application/json',
